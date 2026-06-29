@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student CGPA Calculator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Chart.js for performance trend -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="logo">🎓</div>
+            <div class="header-text">
+                <h1>CGPA Calculator</h1>
+                <p>Calculate your Semester GPA and Cumulative GPA</p>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <aside class="sidebar">
+                <div class="card">
+                    <h2>Student Information</h2>
+                    <div class="form-group">
+                        <label for="studentName">Name</label>
+                        <input type="text" id="studentName" value="Jane Doe">
+                    </div>
+                    <div class="form-group">
+                        <label for="rollNumber">Roll Number</label>
+                        <input type="text" id="rollNumber" value="CS2023001">
+                    </div>
+                    <div class="form-group">
+                        <label for="department">Department</label>
+                        <input type="text" id="department" value="Computer Science">
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>Settings</h2>
+                    <div class="form-group">
+                        <label for="gradeScale">Grade Scale</label>
+                        <select id="gradeScale">
+                            <option value="10">10-point Scale (O, A+, A...)</option>
+                            <option value="4">4-point Scale (A, B, C...)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="numSemesters">Number of Semesters</label>
+                        <input type="number" id="numSemesters" min="1" max="10" value="2">
+                    </div>
+                </div>
+
+                <div class="card summary-card">
+                    <h2>Overall CGPA</h2>
+                    <div class="cgpa-display" id="overallCgpaDisplay">0.00</div>
+                    <div class="credits-display">Total Credits: <span id="totalCreditsDisplay">0</span></div>
+                    <button id="downloadPdfBtn" class="btn btn-primary btn-full">📄 Download PDF Report</button>
+                </div>
+            </aside>
+
+            <section class="content-area">
+                <div class="tabs" id="semesterTabs">
+                    <!-- Tabs will be generated dynamically by JS -->
+                </div>
+
+                <div class="tab-content" id="tabContentArea">
+                    <!-- Semester data will be generated dynamically by JS -->
+                </div>
+                
+                <div class="tab-content hidden" id="summaryTabContent">
+                    <div class="card">
+                        <h2>Semester-wise Breakdown</h2>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Semester</th>
+                                    <th>Credits</th>
+                                    <th>SGPA</th>
+                                    <th>Running CGPA</th>
+                                </tr>
+                            </thead>
+                            <tbody id="summaryTableBody">
+                                <!-- Populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card chart-card">
+                        <h2>Performance Trend</h2>
+                        <canvas id="performanceChart"></canvas>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
